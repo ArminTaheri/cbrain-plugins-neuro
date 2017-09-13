@@ -35,6 +35,12 @@ class MincFile < SingleFile
   has_viewer :name => "Info & Headers", :partial => :info_header,             :if =>
              Proc.new { |u| u.class.has_minctools?([2,0,0],["mincinfo","mincheader","mincdump","mincexpand"]) && u.is_locally_synced? }
 
+  has_viewer :name => "PIVT",  :partial => :pivt_viewer,          :if =>
+             Proc.new { |u| u.size.present? &&
+                            u.size < 400.megabytes &&
+                            u.is_locally_synced?
+                      }
+
   has_viewer :name => "MincNavigator",  :partial => :minc_navigator,          :if =>
              Proc.new { |u| u.size.present? &&
                             u.size < 400.megabytes &&
@@ -160,4 +166,3 @@ class MincFile < SingleFile
   end
 
 end
-

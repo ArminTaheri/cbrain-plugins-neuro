@@ -1,0 +1,22 @@
+
+<% link_id = "minc_navigator_#{@userfile.id}" %>
+
+<% minc_url = content_userfile_path(@userfile, :content_loader => :minc_content) %>
+
+<%= link_to("Click to start PIVT!",
+      MincFile.public_path('PIVT/index.html').to_s.concat('?').concat(
+        URI.encode_www_form(
+          :link_id => link_id,
+          :file_url => minc_url
+        )
+      ),
+      :class  => "action_link",
+      :id     => link_id,
+      :target => "_blank",
+    )
+%>
+<style type="text/css">
+    a[disabled="disabled"] {
+        pointer-events: none;
+    }
+</style>
